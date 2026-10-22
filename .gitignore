@@ -1,0 +1,11 @@
+.venv/
+.fusewall/
+__pycache__/
+*.pyc
+*.db
+*.db-wal
+*.db-shm
+test-results/
+*.egg-info/
+dist/
+.env

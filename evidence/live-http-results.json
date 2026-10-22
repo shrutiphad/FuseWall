@@ -1,0 +1,32 @@
+{
+  "owner_login": true,
+  "version": "0.2.0",
+  "target": "http://127.0.0.1:8766",
+  "scope": "Isolated synthetic loopback data; no live provider",
+  "Demo \u00b7 Support triage": {
+    "settled": 4,
+    "blocked": 6,
+    "failed": 0
+  },
+  "Demo \u00b7 Research assistant": {
+    "settled": 6,
+    "blocked": 2,
+    "failed": 0
+  },
+  "Demo \u00b7 Content checks": {
+    "settled": 1,
+    "blocked": 5,
+    "failed": 0
+  },
+  "live_sse": true,
+  "real_socket_disconnect_settled": true,
+  "accounting_integrity": {
+    "ok": true,
+    "ledger_micro": 85980,
+    "request_micro": 85980,
+    "inconsistent_scopes": [],
+    "inconsistent_requests": []
+  },
+  "replay_no_new_traffic": true,
+  "live_revocation": true
+}

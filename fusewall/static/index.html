@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Fusewall — a local spending-control gateway and offline traffic laboratory.">
+  <title>Fusewall · Local control room</title>
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/styles.css">
+  <script src="/static/app.js" type="module"></script>
+</head>
+<body>
+  <a id="skip-link" class="skip-link" href="#content" hidden>Skip to main content</a>
+  <div id="login" class="unlock-wrap">
+    <main class="unlock-panel">
+      <div class="brand"><span class="brand-mark">f</span><span>fusewall<span class="brand-dot">.</span></span></div>
+      <p class="eyebrow">YOUR LOCAL CONTROL ROOM</p>
+      <h1>A fuse for your<br>AI bill.</h1>
+      <p class="muted">Set the limits. See the decisions. Test what happens when an agent won't stop.</p>
+      <div class="mode-note"><span class="live-dot"></span> Offline simulation · No paid API calls</div>
+      <form id="unlock-form">
+        <label for="owner-token">Owner token</label>
+        <input id="owner-token" type="password" autocomplete="off" placeholder="fw_owner_…" required minlength="16">
+        <button class="button primary full" type="submit">Unlock workspace <span aria-hidden="true">→</span></button>
+      </form>
+      <p id="login-error" role="alert" class="error"></p>
+      <div class="unlock-help"><strong>First time here?</strong><p>From the project folder, run <code>python -m fusewall token</code> and paste the local token above. It stays on this computer.</p></div>
+    </main>
+    <aside class="unlock-aside"><p>CONTROL BEFORE<br>THE NEXT CALL.</p><div class="fuse-illustration" aria-hidden="true"><div></div><span>AUTHORIZED</span><div></div><span class="open-circuit">LIMIT REACHED</span><div></div></div><small>Built to run locally. Designed to fail closed.</small></aside>
+  </div>
+  <div id="shell" hidden>
+    <aside class="sidebar">
+      <a href="#overview" class="brand"><span class="brand-mark">f</span><span>fusewall<span class="brand-dot">.</span></span></a>
+      <div class="workspace"><span class="workspace-icon">L</span><div><strong>Local workspace</strong><small>Owner access</small></div><span class="workspace-arrow">⌄</span></div>
+      <p class="nav-caption">CONTROL ROOM</p>
+      <nav id="navigation" aria-label="Main navigation"></nav>
+      <div class="sidebar-bottom"><div class="local-badge"><span class="live-dot"></span> Local instance</div><p>No cloud accounts.<br>No paid upstreams.</p><button id="logout" class="text-button">Lock workspace <span aria-hidden="true">↗</span></button></div>
+    </aside>
+    <div class="main-shell">
+      <header class="topbar"><button id="mobile-menu" class="icon-button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navigation">☰</button><div><span class="breadcrumb">Workspace</span><span class="breadcrumb-sep">/</span><span id="current-page">Overview</span></div><div class="topbar-right"><span class="mode-badge"><span class="live-dot"></span> SIMULATION</span><span class="avatar" title="Local owner">LO</span></div></header>
+      <main id="content" tabindex="-1"></main>
+      <footer class="page-footer"><span><span class="live-dot"></span> All costs shown are simulated reference costs.</span><span id="connection-state" role="status">Connecting locally…</span><span id="refresh-state">Local storage · v0.2.0</span></footer>
+    </div>
+  </div>
+  <dialog id="modal" aria-labelledby="dialog-title"><div id="modal-content"></div><button id="close-modal" class="icon-button modal-close" aria-label="Close dialog">×</button></dialog>
+  <div id="toast" role="status" aria-live="polite" hidden></div>
+</body>
+</html>

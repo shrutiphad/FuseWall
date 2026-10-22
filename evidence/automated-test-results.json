@@ -1,0 +1,11 @@
+{
+  "tests_run": 61,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "passed": true,
+  "elapsed_seconds": 46.087,
+  "javascript_syntax_checked": true,
+  "provider_network_calls": 0,
+  "scope": "Store, HTTP contracts, synthetic streaming, crash/recovery, backup/restore; no live provider validation"
+}
