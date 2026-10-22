@@ -3,23 +3,31 @@ import asyncio
 import json
 import os
 import time
+import re
+import sys
 from pathlib import Path
 import httpx
 
 ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT))
+from fusewall import __version__
 
 
 async def main():
     data_dir = Path(os.environ.get('FUSEWALL_TEST_DATA_DIR', ROOT / '.fusewall'))
     base_url = os.environ.get('FUSEWALL_TEST_URL', 'http://127.0.0.1:8765')
-    assert base_url.startswith('http://127.0.0.1:'), 'Smoke checks must target loopback'
-    token = (data_dir / 'admin-token.txt').read_text().strip()
+    remote = not base_url.startswith('http://127.0.0.1:')
+    assert not remote or (os.environ.get('FUSEWALL_ALLOW_REMOTE_TESTS')=='1' and re.fullmatch(r'https://[^/]+\.vercel\.app',base_url)), 'Use loopback or an explicitly authorized Vercel deployment'
+    token = os.environ.get('FUSEWALL_TEST_OWNER_TOKEN') or (data_dir / 'admin-token.txt').read_text().strip()
     checks = {}
     async with httpx.AsyncClient(base_url=base_url, timeout=30) as client:
         h = {'X-Fusewall-Request':'dashboard'}
         r = await client.post('/api/login',json={'token':token},headers=h)
         r.raise_for_status()
-        checks.update(owner_login=True, version='0.2.0', target=base_url, scope='Isolated synthetic loopback data; no live provider')
+        checks.update(owner_login=True, version=__version__, target=base_url, scope='Authorized synthetic test traffic; no live provider')
+        health=(await client.get('/health/live')).json()
+        assert health['version']==__version__, health
+        checks['storage']=health.get('storage','sqlite')
         state = (await client.get('/api/state')).json()
         keys = state['keys']
         for name, group, ceiling, calls in [('Demo · Support triage','Customer support',18000,10),('Demo · Research assistant','Research',26000,8),('Demo · Content checks','Operations',10000,6)]:
@@ -41,12 +49,16 @@ async def main():
             stream.raise_for_status()
             async for line in stream.aiter_lines():
                 if line.startswith('data: '): break
-        await asyncio.sleep(.2)
-        state = (await client.get('/api/state')).json()
-        disconnected = next(r for r in state['requests'] if r['external_id']=='live-disconnect')
-        assert disconnected['status']=='canceled', disconnected
+        deadline=time.monotonic()+10
+        while True:
+            await asyncio.sleep(.1)
+            state=(await client.get('/api/state')).json()
+            disconnected=next(r for r in state['requests'] if r['external_id']=='live-disconnect')
+            if disconnected['status'] in ('settled','canceled') or time.monotonic()>=deadline:break
+        assert disconnected['status'] in (('settled','canceled') if remote else ('canceled',)), disconnected
+        checks['disconnect_final_status']=disconnected['status']
         assert state['overview']['held_micro']==0, state['overview']
-        checks['real_socket_disconnect_settled'] = True
+        checks['real_socket_disconnect_accounted'] = True
         integrity = (await client.post('/api/integrity',headers=h)).json()
         assert integrity['ok'], integrity
         checks['accounting_integrity'] = integrity

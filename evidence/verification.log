@@ -46,6 +46,48 @@ test_unavailable_authority_returns_503_without_dispatch (test_api.APITests.test_
 test_unsupported_fields_and_unknown_model_rejected (test_api.APITests.test_unsupported_fields_and_unknown_model_rejected) ... ok
 test_validation_never_echoes_input (test_api.APITests.test_validation_never_echoes_input) ... ok
 test_workload_key_cannot_grant_owner_permissions (test_api.APITests.test_workload_key_cannot_grant_owner_permissions) ... ok
+test_cloud_requires_durable_secrets_and_explicit_hosts (test_postgres.CloudConfigurationTests.test_cloud_requires_durable_secrets_and_explicit_hosts) ... ok
+test_vercel_never_falls_back_to_sqlite (test_postgres.CloudConfigurationTests.test_vercel_never_falls_back_to_sqlite) ... ok
+test_backup_integrity_and_csv_formula_safety (test_postgres.PostgresAPITests.test_backup_integrity_and_csv_formula_safety) ... ok
+test_boolean_and_reconciliation_contracts_are_strict (test_postgres.PostgresAPITests.test_boolean_and_reconciliation_contracts_are_strict) ... ok
+test_cloud_host_allowlist_is_explicit (test_postgres.PostgresAPITests.test_cloud_host_allowlist_is_explicit) ... ok
+test_cloud_limits_recovery_and_secure_cookie (test_postgres.PostgresAPITests.test_cloud_limits_recovery_and_secure_cookie) ... ok
+test_cross_origin_writes_and_missing_header_rejected (test_postgres.PostgresAPITests.test_cross_origin_writes_and_missing_header_rejected) ... ok
+test_dns_rebinding_host_rejected (test_postgres.PostgresAPITests.test_dns_rebinding_host_rejected) ... ok
+test_float_and_negative_money_rejected (test_postgres.PostgresAPITests.test_float_and_negative_money_rejected) ... ok
+test_full_history_and_receipt_contracts (test_postgres.PostgresAPITests.test_full_history_and_receipt_contracts) ... ok
+test_health_and_frontend (test_postgres.PostgresAPITests.test_health_and_frontend) ... ok
+test_lab_concurrent_ceiling (test_postgres.PostgresAPITests.test_lab_concurrent_ceiling) ... ok
+test_malformed_host_is_rejected_without_server_error (test_postgres.PostgresAPITests.test_malformed_host_is_rejected_without_server_error) ... ok
+test_model_allowlist (test_postgres.PostgresAPITests.test_model_allowlist) ... ok
+test_non_streaming_completion_and_receipt (test_postgres.PostgresAPITests.test_non_streaming_completion_and_receipt) ... ok
+test_oversized_body_rejected (test_postgres.PostgresAPITests.test_oversized_body_rejected) ... ok
+test_owner_access_cookie_and_logout (test_postgres.PostgresAPITests.test_owner_access_cookie_and_logout) ... ok
+test_owner_token_is_not_a_workload_key (test_postgres.PostgresAPITests.test_owner_token_is_not_a_workload_key) ... ok
+test_partial_and_known_failure_accounting (test_postgres.PostgresAPITests.test_partial_and_known_failure_accounting) ... ok
+test_preview_is_owner_only_validated_and_nonmutating (test_postgres.PostgresAPITests.test_preview_is_owner_only_validated_and_nonmutating) ... ok
+test_revoked_key_rejected (test_postgres.PostgresAPITests.test_revoked_key_rejected) ... ok
+test_streaming_contract_and_usage (test_postgres.PostgresAPITests.test_streaming_contract_and_usage) ... ok
+test_unavailable_authority_returns_503_without_dispatch (test_postgres.PostgresAPITests.test_unavailable_authority_returns_503_without_dispatch) ... ok
+test_unsupported_fields_and_unknown_model_rejected (test_postgres.PostgresAPITests.test_unsupported_fields_and_unknown_model_rejected) ... ok
+test_validation_never_echoes_input (test_postgres.PostgresAPITests.test_validation_never_echoes_input) ... ok
+test_workload_key_cannot_grant_owner_permissions (test_postgres.PostgresAPITests.test_workload_key_cannot_grant_owner_permissions) ... ok
+test_accounting_snapshot_with_concurrent_writer (test_postgres.PostgresTests.test_accounting_snapshot_with_concurrent_writer) ... ok
+test_database_faults_do_not_disclose_connection_strings (test_postgres.PostgresTests.test_database_faults_do_not_disclose_connection_strings) ... ok
+test_dispatch_rechecks_expiry_even_without_recovery (test_postgres.PostgresTests.test_dispatch_rechecks_expiry_even_without_recovery) ... ok
+test_duplicate_admission_and_settlement_across_instances (test_postgres.PostgresTests.test_duplicate_admission_and_settlement_across_instances) ... ok
+test_expired_reserved_work_cannot_dispatch_and_recovery_retains_uncertainty (test_postgres.PostgresTests.test_expired_reserved_work_cannot_dispatch_and_recovery_retains_uncertainty) ... ok
+test_fresh_worker_does_not_recover_active_peer_requests (test_postgres.PostgresTests.test_fresh_worker_does_not_recover_active_peer_requests) ... ok
+test_lab_lease_is_shared_and_old_owner_cannot_release_new_lease (test_postgres.PostgresTests.test_lab_lease_is_shared_and_old_owner_cannot_release_new_lease) ... ok
+test_ledger_rejects_update_delete_and_truncate (test_postgres.PostgresTests.test_ledger_rejects_update_delete_and_truncate) ... ok
+test_login_failures_are_durable_and_rate_limit_is_global (test_postgres.PostgresTests.test_login_failures_are_durable_and_rate_limit_is_global) ... ok
+test_metadata_restore_is_atomic_validated_and_never_overwrites (test_postgres.PostgresTests.test_metadata_restore_is_atomic_validated_and_never_overwrites) ... ok
+test_migration_rejects_reserved_or_unrecognized_schema (test_postgres.PostgresTests.test_migration_rejects_reserved_or_unrecognized_schema) ... ok
+test_owner_rotation_invalidates_old_sessions (test_postgres.PostgresTests.test_owner_rotation_invalidates_old_sessions) ... ok
+test_owner_session_survives_worker_change_and_logout_is_shared (test_postgres.PostgresTests.test_owner_session_survives_worker_change_and_logout_is_shared) ... ok
+test_private_schema_has_no_public_access (test_postgres.PostgresTests.test_private_schema_has_no_public_access) ... ok
+test_resolution_audit_failure_rolls_back_shared_settlement (test_postgres.PostgresTests.test_resolution_audit_failure_rolls_back_shared_settlement) ... ok
+test_separate_instances_share_one_parent_budget (test_postgres.PostgresTests.test_separate_instances_share_one_parent_budget) ... ok
 test_database_dispatch_wait_does_not_block_the_event_loop (test_review.ReviewTests.test_database_dispatch_wait_does_not_block_the_event_loop) ... ok
 test_insights_use_admission_month_and_label_released_allowance (test_review.ReviewTests.test_insights_use_admission_month_and_label_released_allowance) ... ok
 test_integrity_detects_per_request_mismatch_even_when_totals_match (test_review.ReviewTests.test_integrity_detects_per_request_mismatch_even_when_totals_match) ... ok
@@ -61,6 +103,6 @@ test_repeated_cancellation_does_not_abandon_a_reservation_thread (test_review.Re
 test_resolution_audit_failure_rolls_back_settlement (test_review.ReviewTests.test_resolution_audit_failure_rolls_back_settlement) ... ok
 
 ----------------------------------------------------------------------
-Ran 61 tests in 41.456s
+Ran 103 tests in 50.481s
 
 OK

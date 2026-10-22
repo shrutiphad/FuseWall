@@ -9,3 +9,6 @@ test-results/
 *.egg-info/
 dist/
 .env
+.env.*
+!.env.example
+.vercel/

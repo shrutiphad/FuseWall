@@ -4,6 +4,8 @@ import asyncio
 import csv
 import hmac
 import io
+import json
+import os
 import re
 import secrets
 import sqlite3
@@ -27,15 +29,25 @@ STATIC = Path(__file__).parent / "static"
 COOKIE = "fusewall_owner"
 
 
-def create_app(data_dir=None):
-    store = Store(data_dir or Path.cwd() / ".fusewall")
-    lock = InstanceLock(store.directory / "server.lock")
+def create_app(data_dir=None, *, store=None, allowed_hosts=None):
+    if store is None and os.environ.get("VERCEL"):
+        raise RuntimeError("Vercel requires the shared PostgreSQL entrypoint; local SQLite is disabled there.")
+    store = store if store is not None else Store(data_dir or Path.cwd() / ".fusewall")
+    hosted = getattr(store, "hosted", False)
+    if hosted and not allowed_hosts:
+        raise ValueError("Hosted deployments require an explicit host allowlist")
+    hosts = set(allowed_hosts or ("localhost", "127.0.0.1", "::1", "testserver"))
+    lock = None if hosted else InstanceLock(store.directory / "server.lock")
     auth_sessions = {}
     login_attempts = deque(maxlen=100)
     lab_busy = False
 
     @asynccontextmanager
     async def lifespan(app):
+        if hosted:
+            await asyncio.to_thread(store.assert_ready)
+            yield
+            return
         lock.acquire()
         try:
             store.recover()
@@ -70,11 +82,12 @@ def create_app(data_dir=None):
             hostname = urlsplit("http://" + host).hostname
         except ValueError:
             hostname = None
-        if hostname not in ("localhost", "127.0.0.1", "::1", "testserver"):
-            return JSONResponse({"error": {"code": "invalid_host", "message": "This installation only serves local hosts."}}, status_code=400)
+        if hostname not in hosts:
+            return JSONResponse({"error": {"code": "invalid_host", "message": "This host is not configured for this installation."}}, status_code=400)
         if request.method in ("POST", "PATCH", "DELETE", "PUT"):
             origin = request.headers.get("origin")
-            if origin and origin != f"{request.url.scheme}://{host}":
+            scheme = "https" if hosted else request.url.scheme
+            if origin and origin != f"{scheme}://{host}":
                 return JSONResponse({"error": {"code": "invalid_origin", "message": "Cross-origin writes are disabled."}}, status_code=403)
             if request.url.path.startswith("/api/") and request.headers.get("x-fusewall-request") != "dashboard":
                 return JSONResponse({"error": {"code": "request_header_required", "message": "The dashboard request header is required."}}, status_code=403)
@@ -99,6 +112,10 @@ def create_app(data_dir=None):
 
     def owner(request: Request):
         raw = request.cookies.get(COOKIE, "")
+        if hosted:
+            if not store.owner_valid(raw):
+                raise Fault(401, "owner_required", "Unlock this installation with its owner token.")
+            return
         expiry = auth_sessions.get(digest(raw), 0)
         if not raw or expiry <= time.time():
             raise Fault(401, "owner_required", "Unlock this local installation with its owner token.")
@@ -110,15 +127,20 @@ def create_app(data_dir=None):
 
     @app.get("/health/live")
     def live():
-        return {"status": "alive", "version": __version__, "mode": "simulation"}
+        return {"status": "alive", "version": __version__, "mode": "simulation", "storage": "postgres" if hosted else "sqlite"}
 
     @app.get("/health/ready")
     def ready():
-        store.read("SELECT 1")
+        store.assert_ready() if hosted else store.read("SELECT 1")
         return {"status": "ready", "mode": "simulation"}
 
     @app.post("/api/login")
     async def login(body: Login, request: Request):
+        if hosted:
+            raw = await engine.database_call(store.login, body.token)
+            response = JSONResponse({"ok": True, "mode": "simulation"})
+            response.set_cookie(COOKIE, raw, httponly=True, samesite="strict", max_age=8*3600, secure=True)
+            return response
         # No await in this block: rate counters and session mutations stay on the event loop.
         now = time.time()
         while login_attempts and login_attempts[0] < now-60:
@@ -141,7 +163,10 @@ def create_app(data_dir=None):
 
     @app.post("/api/logout", dependencies=[Depends(owner)])
     async def logout(request: Request):
-        auth_sessions.pop(digest(request.cookies.get(COOKIE, "")), None)
+        if hosted:
+            await engine.database_call(store.logout, request.cookies.get(COOKIE, ""))
+        else:
+            auth_sessions.pop(digest(request.cookies.get(COOKIE, "")), None)
         response = JSONResponse({"ok": True})
         response.delete_cookie(COOKIE)
         return response
@@ -150,7 +175,8 @@ def create_app(data_dir=None):
     def state():
         return {"overview": store.overview(), "keys": store.list_keys(), "sessions": store.sessions(),
                 "requests": store.request_list(), "events": store.read("SELECT * FROM events ORDER BY id DESC LIMIT 80"),
-                "rates": RATES, "rate_version": RATE_VERSION, "version": __version__}
+                "rates": RATES, "rate_version": RATE_VERSION, "version": __version__,
+                "installation": {"hosted": hosted, "storage": "postgres" if hosted else "sqlite", "backup_format": "json" if hosted else "sqlite"}}
 
     @app.post("/api/keys", dependencies=[Depends(owner)])
     def create_key(body: KeyCreate):
@@ -193,8 +219,19 @@ def create_app(data_dir=None):
 
     @app.post("/api/backup", dependencies=[Depends(owner)])
     def backup():
+        if hosted:
+            export = store.export_snapshot()
+            if len(json.dumps(export).encode()) > 4_000_000:
+                raise Fault(409, "export_too_large", "Metadata export exceeds the hosted response limit. Use the cloud-admin export command from a trusted computer.")
+            return JSONResponse(export, headers={"Content-Disposition": 'attachment; filename="fusewall-metadata-export.json"'})
         path = store.backup()
         return FileResponse(path, filename=path.name, media_type="application/octet-stream")
+
+    @app.post("/api/recovery", dependencies=[Depends(owner)])
+    def recover_expired():
+        if not hosted:
+            raise Fault(409, "local_recovery", "Local recovery runs only when the server restarts.")
+        return store.recover()
 
     @app.post("/api/requests/{request_id}/resolve", dependencies=[Depends(owner)])
     def resolve(request_id: str, body: Resolution):
@@ -239,6 +276,16 @@ def create_app(data_dir=None):
     @app.post("/api/lab", dependencies=[Depends(owner)])
     async def lab(body: LabRun):
         nonlocal lab_busy
+        if hosted:
+            if body.calls > 20 or body.parallel > 4:
+                raise Fault(422, "hosted_lab_limit", "Hosted batches allow up to 20 calls and 4 parallel operations to fit function and database limits.")
+            token, canceled = await engine.wait_owned(asyncio.create_task(asyncio.to_thread(store.acquire_lab)))
+            try:
+                if canceled:
+                    raise asyncio.CancelledError
+                return await engine.run_lab(store, body)
+            finally:
+                await engine.database_call(store.release_lab, token)
         if lab_busy:
             raise Fault(409, "lab_busy", "A laboratory run is already active. Wait for it to complete.")
         lab_busy = True

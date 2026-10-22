@@ -1,8 +1,9 @@
 {
   "owner_login": true,
-  "version": "0.2.0",
-  "target": "http://127.0.0.1:8766",
-  "scope": "Isolated synthetic loopback data; no live provider",
+  "version": "0.3.0",
+  "target": "http://127.0.0.1:8767",
+  "scope": "Authorized synthetic test traffic; no live provider",
+  "storage": "sqlite",
   "Demo \u00b7 Support triage": {
     "settled": 4,
     "blocked": 6,
@@ -19,11 +20,12 @@
     "failed": 0
   },
   "live_sse": true,
-  "real_socket_disconnect_settled": true,
+  "disconnect_final_status": "canceled",
+  "real_socket_disconnect_accounted": true,
   "accounting_integrity": {
     "ok": true,
-    "ledger_micro": 85980,
-    "request_micro": 85980,
+    "ledger_micro": 55380,
+    "request_micro": 55380,
     "inconsistent_scopes": [],
     "inconsistent_requests": []
   },

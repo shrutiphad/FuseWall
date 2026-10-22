@@ -10,7 +10,7 @@ async function main() {
   const out = path.join(root,'evidence');
   const base = process.env.FUSEWALL_TEST_URL || 'http://127.0.0.1:8765';
   const dataDir = process.env.FUSEWALL_TEST_DATA_DIR || path.join(root,'.fusewall');
-  assert(base.startsWith('http://127.0.0.1:'),'Browser checks must target loopback');
+  assert(base.startsWith('http://127.0.0.1:') || (process.env.FUSEWALL_ALLOW_REMOTE_TESTS==='1' && /^https:\/\/[^/]+\.vercel\.app$/.test(base)),'Use loopback or an explicitly authorized Vercel deployment');
   fs.mkdirSync(out,{recursive:true});
   const browser = await chromium.launch({channel:'msedge',headless:true});
   activeBrowser = browser;
@@ -20,7 +20,7 @@ async function main() {
   page.on('pageerror', e=>errors.push(e.message));
   page.on('console', e=>{if(e.type()==='error' && !e.text().includes('401')) errors.push(e.text());});
   await page.goto(base);
-  await page.locator('#owner-token').fill(fs.readFileSync(path.join(dataDir,'admin-token.txt'),'utf8').trim());
+  await page.locator('#owner-token').fill(process.env.FUSEWALL_TEST_OWNER_TOKEN || fs.readFileSync(path.join(dataDir,'admin-token.txt'),'utf8').trim());
   await page.getByRole('button',{name:'Unlock workspace'}).click();
   await page.getByRole('heading',{name:'Your agents. Your limits.'}).waitFor();
   assert(await page.locator('.skip-link').evaluate(el=>el.getBoundingClientRect().bottom<0),'Skip link hidden until focused');
@@ -74,8 +74,11 @@ async function main() {
   const seeded = await page.evaluate(async name=>{
     const state=await (await fetch('/api/state')).json();
     const key=state.keys.find(k=>k.name===name);
-    const response=await fetch('/api/lab',{method:'POST',headers:{'Content-Type':'application/json','X-Fusewall-Request':'dashboard'},body:JSON.stringify({key_id:key.id,session_id:'pagination-'+Date.now(),calls:50,parallel:2})});
-    return response.ok;
+    for(const calls of [20,20,10]) {
+      const response=await fetch('/api/lab',{method:'POST',headers:{'Content-Type':'application/json','X-Fusewall-Request':'dashboard'},body:JSON.stringify({key_id:key.id,session_id:'pagination-'+Date.now(),calls,parallel:2})});
+      if(!response.ok) return false;
+    }
+    return true;
   },keyName);
   assert(seeded,'Seed isolated pagination traffic');
   await page.getByRole('button',{name:'Search',exact:true}).click();
@@ -119,7 +122,7 @@ async function main() {
   await page.evaluate(()=>window.scrollTo(0,0));
   await page.screenshot({path:path.join(out,'dashboard-mobile.png'),fullPage:true});
   assert.deepEqual(errors,[],'Browser console/runtime errors');
-  const results={version:'0.2.0',target:base,scope:'Isolated synthetic loopback data',desktop:'1440×1000',mobile:'390×844',routesChecked:9,ownerLogin:true,keyCreation:true,lab:true,previewWithoutTraffic:true,blockedPreview:true,pagination:true,keyboardReceipt:true,search:true,preservesFocusedDraft:true,mobileMenuEscape:true,receipt:true,replay:true,insights:true,integrity:true,horizontalOverflow:false,consoleErrors:errors};
+  const results={version:'0.3.0',target:base,scope:'Authorized synthetic demonstration traffic; no live provider',desktop:'1440×1000',mobile:'390×844',routesChecked:9,ownerLogin:true,keyCreation:true,lab:true,previewWithoutTraffic:true,blockedPreview:true,pagination:true,keyboardReceipt:true,search:true,preservesFocusedDraft:true,mobileMenuEscape:true,receipt:true,replay:true,insights:true,integrity:true,horizontalOverflow:false,consoleErrors:errors};
   fs.writeFileSync(path.join(out,'browser-results.json'),JSON.stringify(results,null,2));
   console.log(JSON.stringify(results));
   await browser.close();

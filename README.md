@@ -2,7 +2,15 @@
 
 A working local AI budget gateway, dashboard, and deterministic failure laboratory. No cloud account, model download, frontend build, or paid API is needed to use this version.
 
-**Version 0.2.0 · single-owner prototype · simulated upstream only.** Costs are synthetic USD reference amounts, not real charges or verified savings. This version does not hold prepaid money, call a real LLM, or provide hosted production service.
+**Version 0.3.0 · single-owner prototype · simulated upstream only.** Costs are synthetic USD reference amounts, not real charges or verified savings. This version does not hold prepaid money, call a real LLM, or provide hosted production service.
+
+## PostgreSQL / Vercel preparation in 0.3
+
+Shared PostgreSQL storage, durable owner sessions/login counters, cross-worker lab coordination, expired-lease recovery, metadata export/restore, a FastAPI cloud entrypoint and deployment exclusions are implemented. They were tested on isolated local PostgreSQL. **The Supabase connection and actual hosted deployment remain pending.** This is not a claim that the app is live.
+
+See [Vercel/Supabase setup and rollout gates](docs/VERCEL-SUPABASE.md). The deployment requires a real persistent database, stable encrypted secrets and explicit hosts. Automatic Git deployments are disabled until a verified preview exists. The native SQLite mode remains runnable as before.
+
+The expanded suite has 103 cases when `FUSEWALL_PG_TEST_URL` points to an isolated loopback PostgreSQL server. Without it, PostgreSQL-specific tests are explicitly skipped; do not describe that run as full cloud verification. Never point disposable schema tests at customer/Supabase databases.
 
 ## New in 0.2
 
@@ -125,7 +133,7 @@ python verify.py
 python -m fusewall check
 ```
 
-The 61 backend tests include concurrent overspend attempts, cross-key parent budgets, idempotency races, rate-card and month snapshots, revocation before dispatch, crashes in a separate Python process, cancellation during reservation, stream cancellation, unavailable-authority rejection, randomized accounting sequences, append-only triggers, backup restore, origin/host rejection, validation, CSV formula safety and privilege separation. They use isolated workspace directories and synthetic inputs, not the running user's database.
+The original 61 backend tests include concurrent overspend attempts, cross-key parent budgets, idempotency races, rate-card and month snapshots, revocation before dispatch, crashes in a separate Python process, cancellation during reservation, stream cancellation, unavailable-authority rejection, randomized accounting sequences, append-only triggers, backup restore, origin/host rejection, validation, CSV formula safety and privilege separation. They use isolated workspace directories and synthetic inputs, not the running user's database.
 
 `python tests/live_smoke.py` exercises the running server, creates labeled demonstration/verification keys and requests, tests an actual socket disconnect, and saves JSON evidence. It changes the local demonstration database; do not run it against a future customer environment.
 
@@ -176,4 +184,4 @@ Real-provider/BYOK support, supported SDK matrices, PostgreSQL/shared deployment
 
 ## Portable source release
 
-`python scripts/package.py` creates `dist/fusewall-local-v0.2.0.zip` and refreshes the source `RELEASE-MANIFEST.json`. Use `--output <path>` for a different destination. It excludes runtime credentials, databases, caches and test scratch data; verifies every archive member against SHA-256; and includes the manifest exactly once. The archive does not migrate an installation's runtime data. Preserve any needed database/identity backup separately.
+`python scripts/package.py` creates `dist/fusewall-local-v0.3.0.zip` and refreshes the source `RELEASE-MANIFEST.json`. Use `--output <path>` for a different destination. It excludes runtime credentials, databases, caches and test scratch data; verifies every archive member against SHA-256; and includes the manifest exactly once. The archive does not migrate an installation's runtime data. Preserve any needed database/identity backup separately.

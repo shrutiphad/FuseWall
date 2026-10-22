@@ -1,7 +1,7 @@
 {
-  "version": "0.2.0",
-  "target": "http://127.0.0.1:8766",
-  "scope": "Isolated synthetic loopback data",
+  "version": "0.3.0",
+  "target": "http://127.0.0.1:8767",
+  "scope": "Authorized synthetic demonstration traffic; no live provider",
   "desktop": "1440×1000",
   "mobile": "390×844",
   "routesChecked": 9,

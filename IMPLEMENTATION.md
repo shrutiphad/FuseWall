@@ -1,3 +1,13 @@
+# 0.3.0 shared-storage preparation
+
+22 October 2026. Supabase was selected by the user. The PostgreSQL adapter, private-schema migration, durable owner sessions/rate counters, cross-instance lab lease, expiry-gated recovery, explicit HTTPS cloud entrypoint and metadata export/empty-schema restore are implemented. Native SQLite stays supported. Vercel refuses SQLite fallback.
+
+Verification: 103 tests passed with no failures/errors/skips using isolated local PostgreSQL plus the native backend; nine desktop/mobile browser routes passed on a separate native 0.3 instance. The user's Supabase project is not connected, the database URL is absent from Vercel, and public deployment remains incomplete. Preview/production owner and fingerprint secrets/schema names are configured encrypted on the existing Hobby project. No paid services were activated. See docs/VERCEL-SUPABASE.md for actual rollout gates and limitations.
+
+The earlier version records below are historical evidence, not current hosted-deployment claims.
+
+---
+
 # Release 0.2.0 review update
 
 Date: 22 October 2026. Canonical working source: `C:\Users\ADMIN\Documents\RELAY\codebase`. Additional spending: INR 0. Scope remains local, single-owner, simulation only.

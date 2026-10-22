@@ -1,0 +1,17 @@
+.git
+.fusewall
+.fusewall*
+.venv
+.env
+.env.*
+__pycache__
+**/__pycache__
+*.pyc
+*.db
+*.db-wal
+*.db-shm
+test-results
+tests
+evidence
+dist
+*.zip

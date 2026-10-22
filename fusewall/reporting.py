@@ -110,7 +110,8 @@ def insights(store):
         breakdown = {}
         for dimension, column in (("workloads", "k.name"), ("clients", "k.client"), ("models", "r.model")):
             group = "r.key_id" if dimension == "workloads" else column
-            breakdown[dimension] = rows(conn, f"""SELECT {column} AS name,count(*) AS requests,sum(r.actual) AS actual_micro,
+            label = "min(k.name)" if dimension == "workloads" else column
+            breakdown[dimension] = rows(conn, f"""SELECT {label} AS name,count(*) AS requests,sum(r.actual) AS actual_micro,
                 sum(CASE WHEN r.status='blocked' THEN 1 ELSE 0 END) AS blocked
                 FROM requests r JOIN keys k ON k.id=r.key_id {where}
                 GROUP BY {group} ORDER BY actual_micro DESC,name LIMIT 20""", params)
