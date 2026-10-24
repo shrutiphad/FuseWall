@@ -1,0 +1,34 @@
+{
+  "owner_login": true,
+  "version": "0.3.0",
+  "target": "https://fusewall-5ogbuke7l-shrutiphadwork-6652s-projects.vercel.app",
+  "scope": "Authorized synthetic test traffic; no live provider",
+  "storage": "postgres",
+  "Demo \u00b7 Support triage": {
+    "settled": 4,
+    "blocked": 6,
+    "failed": 0
+  },
+  "Demo \u00b7 Research assistant": {
+    "settled": 6,
+    "blocked": 2,
+    "failed": 0
+  },
+  "Demo \u00b7 Content checks": {
+    "settled": 2,
+    "blocked": 4,
+    "failed": 0
+  },
+  "live_sse": true,
+  "disconnect_final_status": "settled",
+  "real_socket_disconnect_accounted": true,
+  "accounting_integrity": {
+    "ok": true,
+    "ledger_micro": 50120,
+    "request_micro": 50120,
+    "inconsistent_scopes": [],
+    "inconsistent_requests": []
+  },
+  "replay_no_new_traffic": true,
+  "live_revocation": true
+}

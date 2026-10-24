@@ -2,11 +2,11 @@
 
 A working local AI budget gateway, dashboard, and deterministic failure laboratory. No cloud account, model download, frontend build, or paid API is needed to use this version.
 
-**Version 0.3.0 · single-owner prototype · simulated upstream only.** Costs are synthetic USD reference amounts, not real charges or verified savings. This version does not hold prepaid money, call a real LLM, or provide hosted production service.
+**Version 0.3.0 · single-owner prototype · simulated upstream only.** Costs are synthetic USD reference amounts, not real charges or verified savings. This version does not hold prepaid money or call a real LLM. Hosted availability is recorded in docs/VERCEL-SUPABASE.md.
 
 ## PostgreSQL / Vercel preparation in 0.3
 
-Shared PostgreSQL storage, durable owner sessions/login counters, cross-worker lab coordination, expired-lease recovery, metadata export/restore, a FastAPI cloud entrypoint and deployment exclusions are implemented. They were tested on isolated local PostgreSQL. **The Supabase connection and actual hosted deployment remain pending.** This is not a claim that the app is live.
+Shared PostgreSQL storage, durable owner sessions/login counters, cross-worker lab coordination, expired-lease recovery, metadata export/restore, a FastAPI cloud entrypoint and deployment exclusions are implemented. They were tested on isolated local PostgreSQL. **The actual Supabase connection and Vercel preview passed hosted HTTP and desktop/mobile browser checks.** Production publication remains pending in this commit. See evidence/hosted-preview/ for the tested preview target.
 
 See [Vercel/Supabase setup and rollout gates](docs/VERCEL-SUPABASE.md). The deployment requires a real persistent database, stable encrypted secrets and explicit hosts. Automatic Git deployments are disabled until a verified preview exists. The native SQLite mode remains runnable as before.
 

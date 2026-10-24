@@ -7,7 +7,7 @@ let activeBrowser;
 async function main() {
   const { chromium } = require(process.env.FUSEWALL_PLAYWRIGHT || 'playwright');
   const root = path.resolve(__dirname,'..');
-  const out = path.join(root,'evidence');
+  const out = process.env.FUSEWALL_EVIDENCE_DIR || path.join(root,'evidence');
   const base = process.env.FUSEWALL_TEST_URL || 'http://127.0.0.1:8765';
   const dataDir = process.env.FUSEWALL_TEST_DATA_DIR || path.join(root,'.fusewall');
   assert(base.startsWith('http://127.0.0.1:') || (process.env.FUSEWALL_ALLOW_REMOTE_TESTS==='1' && /^https:\/\/[^/]+\.vercel\.app$/.test(base)),'Use loopback or an explicitly authorized Vercel deployment');
@@ -15,6 +15,12 @@ async function main() {
   const browser = await chromium.launch({channel:'msedge',headless:true});
   activeBrowser = browser;
   const page = await browser.newPage({viewport:{width:1440,height:1000},deviceScaleFactor:1});
+  if (process.env.FUSEWALL_VERCEL_OIDC_TOKEN && base.startsWith('https://')) {
+    const origin = new URL(base).origin;
+    await page.route('**/*', route => route.continue(new URL(route.request().url()).origin === origin ? {
+      headers: {...route.request().headers(), 'x-vercel-trusted-oidc-idp-token': process.env.FUSEWALL_VERCEL_OIDC_TOKEN}
+    } : {}));
+  }
   const keyName = 'Browser verified key '+Date.now();
   const errors=[];
   page.on('pageerror', e=>errors.push(e.message));

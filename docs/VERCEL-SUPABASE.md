@@ -1,3 +1,11 @@
+# Hosted preview verified — 24 October 2026
+
+Git commit 685dc5a14b3fbcc71edde0ebda485ea84b16ba59 built successfully on Vercel at the target recorded in evidence/hosted-preview/. Hosted HTTP checks passed login, bounded synthetic workloads, SSE, conservative disconnect accounting, replay, revocation and accounting integrity. The proxy completed the disconnected stream and the full simulated cost settled; cancellation is not claimed. Nine-route desktop/mobile browser checks passed without console errors or page overflow.
+
+Short-lived preview OIDC headers are scoped to the exact test origin. Verification scripts accept a separate evidence output directory so hosted runs preserve native evidence. Final text updates remove inaccurate local/offline labels in hosted views. Production promotion remains pending in this commit. The earlier progress/preparation records below are historical.
+
+---
+
 # Supabase deployment progress — 24 October 2026
 
 The separate Fusewall project is active on the verified Free organization plan in Mumbai. Private preview/production schemas and dedicated restricted runtime roles are installed. RLS is enabled and Supabase security advisors returned no findings. Actual TLS transaction-pooler connections and real-database API workflow checks passed (evidence/supabase-workflow-results.json), including shared sessions/data across application instances, SSE, metadata backup, revocation and accounting.

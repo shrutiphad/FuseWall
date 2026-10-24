@@ -20,7 +20,10 @@ async def main():
     assert not remote or (os.environ.get('FUSEWALL_ALLOW_REMOTE_TESTS')=='1' and re.fullmatch(r'https://[^/]+\.vercel\.app',base_url)), 'Use loopback or an explicitly authorized Vercel deployment'
     token = os.environ.get('FUSEWALL_TEST_OWNER_TOKEN') or (data_dir / 'admin-token.txt').read_text().strip()
     checks = {}
-    async with httpx.AsyncClient(base_url=base_url, timeout=30) as client:
+    headers = {}
+    if remote and os.environ.get('FUSEWALL_VERCEL_OIDC_TOKEN'):
+        headers['x-vercel-trusted-oidc-idp-token'] = os.environ['FUSEWALL_VERCEL_OIDC_TOKEN']
+    async with httpx.AsyncClient(base_url=base_url, headers=headers, timeout=30) as client:
         h = {'X-Fusewall-Request':'dashboard'}
         r = await client.post('/api/login',json={'token':token},headers=h)
         r.raise_for_status()
@@ -70,7 +73,7 @@ async def main():
         await client.patch('/api/keys/'+key['id'],headers=h,json={'active':False})
         assert (await client.post('/v1/chat/completions',headers=wh,json={**payload,'stream':False})).status_code==401
         checks['live_revocation'] = True
-    out = ROOT/'evidence'
+    out = Path(os.environ.get('FUSEWALL_EVIDENCE_DIR', ROOT/'evidence'))
     out.mkdir(exist_ok=True)
     (out/'live-http-results.json').write_text(json.dumps(checks,indent=2),encoding='utf8')
     print(json.dumps(checks,indent=2))

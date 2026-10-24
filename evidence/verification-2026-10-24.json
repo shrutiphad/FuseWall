@@ -1,0 +1,14 @@
+{
+  "tests_run": 103,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 40,
+  "passed": true,
+  "elapsed_seconds": 18.849,
+  "javascript_syntax_checked": true,
+  "provider_network_calls": 0,
+  "postgres_integration_enabled": false,
+  "verified_at_utc": "2026-10-24T16:34:49.101403+00:00",
+  "scope": "Native SQLite plus optional isolated loopback PostgreSQL, HTTP contracts, synthetic streaming, crash/leases, export/restore; not Supabase/Vercel/live-provider validation",
+  "postgres_rerun_note": "Local test server could not bind loopback; prior 103-test PostgreSQL run remains historical. Actual Supabase runtime/API and hosted HTTP/browser checks passed separately."
+}

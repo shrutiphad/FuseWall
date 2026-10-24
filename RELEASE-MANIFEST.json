@@ -36,8 +36,8 @@
   },
   {
     "file": "README.md",
-    "bytes": 18285,
-    "sha256": "ebc021d99666db8b8c4df09d25e36d6e67d309005fc9407df4a310cacc67a6c1"
+    "bytes": 18417,
+    "sha256": "3797e76989f50c87c899d4ee4af35434f305564253b4aa73d6c8883e08d2632e"
   },
   {
     "file": "app.py",
@@ -66,8 +66,8 @@
   },
   {
     "file": "docs/VERCEL-SUPABASE.md",
-    "bytes": 7128,
-    "sha256": "a9863d2f66455910d98f8b4eebdb2f4d32cd3d8661edc05e58f85586a38aaec2"
+    "bytes": 8029,
+    "sha256": "9194a5966c3684ea40af56514303fc4f44d40604aa4fcc44c6235ceab0f9535b"
   },
   {
     "file": "evidence/automated-test-results.json",
@@ -98,6 +98,16 @@
     "file": "evidence/decision-receipt.png",
     "bytes": 138292,
     "sha256": "9e77a515a8a72386d790bb04828289c41006e363f26b63a081b89870bd5f6b81"
+  },
+  {
+    "file": "evidence/hosted-preview/browser-results.json",
+    "bytes": 634,
+    "sha256": "5b789ce97728dfd6134d3bc39d347f8b3abb36506ac356b655af374a74fdfeab"
+  },
+  {
+    "file": "evidence/hosted-preview/live-http-results.json",
+    "bytes": 829,
+    "sha256": "f58ae7495cf888ae7911d8f10406de8fd7ac589764988c7ec53d0366d802384e"
   },
   {
     "file": "evidence/live-http-results.json",
@@ -133,6 +143,11 @@
     "file": "evidence/usage-insights.png",
     "bytes": 92331,
     "sha256": "559e625df2326506b58e026f780a73dab64e0a42d07dcf92a2f6aa2387bc3864"
+  },
+  {
+    "file": "evidence/verification-2026-10-24.json",
+    "bytes": 667,
+    "sha256": "e4a13d48419cae51efe246b293313d37ef0131fd06ed104c1f30c9d4c89e1a40"
   },
   {
     "file": "evidence/verification.log",
@@ -196,8 +211,8 @@
   },
   {
     "file": "fusewall/static/app.js",
-    "bytes": 43823,
-    "sha256": "01231fa6a50dfc7381e2cbbbcf13d167ea51f6501f1a263a02a7b5c2d914b9a1"
+    "bytes": 43819,
+    "sha256": "565a155a6d105a33c852dbafa86e4ba5e9acf9f973a0402fd308964fe07c9e9d"
   },
   {
     "file": "fusewall/static/favicon.svg",
@@ -236,8 +251,8 @@
   },
   {
     "file": "scripts/browser-check.cjs",
-    "bytes": 8941,
-    "sha256": "ea465e97c25105d84e37811969afbb845ebbb7d93b431c8d6753c7f4153d30a2"
+    "bytes": 9343,
+    "sha256": "0d16fca1ad74ace662c00811e150a9bd4941aa7ece0b4e16561e0e3ab6e45c2c"
   },
   {
     "file": "scripts/cloud-admin.py",
@@ -261,8 +276,8 @@
   },
   {
     "file": "tests/live_smoke.py",
-    "bytes": 4657,
-    "sha256": "f503262dee390170b64421b73605fa7a46eca6b05cc506119c4484001736e161"
+    "bytes": 4896,
+    "sha256": "e67573b8dc417fa8887950e62e843ee3de5fe19d5717f4c8f3b3cb2023de3e91"
   },
   {
     "file": "tests/support.py",
