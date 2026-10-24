@@ -1,0 +1,17 @@
+{
+  "scope": "Real Supabase preview schema; synthetic inference only",
+  "readiness": true,
+  "secure_owner_cookie": true,
+  "completion": true,
+  "sse": true,
+  "separate_instance_session_and_data_persistence": true,
+  "integrity": {
+    "ok": true,
+    "ledger_micro": 3840,
+    "request_micro": 3840,
+    "inconsistent_scopes": [],
+    "inconsistent_requests": []
+  },
+  "metadata_backup": true,
+  "key_revocation_across_instances": true
+}

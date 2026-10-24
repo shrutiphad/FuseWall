@@ -1,3 +1,11 @@
+# Supabase deployment progress — 24 October 2026
+
+The separate Fusewall project is active on the verified Free organization plan in Mumbai. Private preview/production schemas and dedicated restricted runtime roles are installed. RLS is enabled and Supabase security advisors returned no findings. Actual TLS transaction-pooler connections and real-database API workflow checks passed (evidence/supabase-workflow-results.json), including shared sessions/data across application instances, SSE, metadata backup, revocation and accounting.
+
+Vercel secrets and database connections are configured separately for preview/production; compute region is Mumbai. The first Git-backed build exposed a Python package-discovery error; explicit package selection fixes the source packaging. A local wheel build passed and packaged static assets/migration hashes match the source (evidence/package-build-results.json). No successful hosted verification is claimed by this progress record. The original preparation instructions below remain a rollout/runbook reference, with their earlier access status historical.
+
+---
+
 # Vercel / Supabase preparation: 0.3.0
 
 Status: implemented and tested on isolated PostgreSQL 16. The user's Supabase project is not connected; no successful Vercel deployment is claimed. Additional-spending budget remains zero.

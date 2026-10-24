@@ -11,8 +11,8 @@
   },
   {
     "file": ".gitignore",
-    "bytes": 127,
-    "sha256": "1bdf2b50d7a447138ea3c4c6d5970c6cb102a567aaad54206de8479387349e54"
+    "bytes": 134,
+    "sha256": "b85d6e033a9078d429fe30073ad92cf63fb5845d7a41f69dead607bd6ed53bd5"
   },
   {
     "file": ".vercelignore",
@@ -50,36 +50,6 @@
     "sha256": "b18f6724913d7811c531f7388b935c6b213628f2a4cc8a8ddb47f6672a4e2bd2"
   },
   {
-    "file": "pyproject.toml",
-    "bytes": 474,
-    "sha256": "9400fbec4521b87a4540efb3eca9b849a561d4a7a1e936a072aaf576554b4687"
-  },
-  {
-    "file": "requirements-lock.txt",
-    "bytes": 424,
-    "sha256": "6e6de94c05860ecff21fd1c7461dba3ade165544a0c2ccae9a5ab313798635fe"
-  },
-  {
-    "file": "requirements.txt",
-    "bytes": 70,
-    "sha256": "cc8ea4dd6510293986e2ddc4815660d485a437f275d276e2c66b0831b8b0ccad"
-  },
-  {
-    "file": "start.ps1",
-    "bytes": 520,
-    "sha256": "e33ac0b42b653dd4c3f9c572f0569d4f5cfa45a1b05fbb58e014cc7121f11f82"
-  },
-  {
-    "file": "vercel.json",
-    "bytes": 170,
-    "sha256": "81ed046eaf1b21ee91396773131ec71765162ca55c214ce658e22eb5c3f49c6b"
-  },
-  {
-    "file": "verify.py",
-    "bytes": 1560,
-    "sha256": "99f351cdece1f30dd0bf2fc9fee5085e8507ae06d96980739dfa36b1693545b5"
-  },
-  {
     "file": "docs/ARCHITECTURE.md",
     "bytes": 6722,
     "sha256": "b42d77f8b36ff5b620dca1cc1987ad26b7e78a8e90151a7c8d1586adc976bd94"
@@ -96,8 +66,8 @@
   },
   {
     "file": "docs/VERCEL-SUPABASE.md",
-    "bytes": 6020,
-    "sha256": "664c5af2baeeb4e7295862ad1808a6ed5fe1588be0ef07636fca97a1c248ef4d"
+    "bytes": 7128,
+    "sha256": "a9863d2f66455910d98f8b4eebdb2f4d32cd3d8661edc05e58f85586a38aaec2"
   },
   {
     "file": "evidence/automated-test-results.json",
@@ -135,6 +105,11 @@
     "sha256": "39bee0014b51311d1e42d2dd562d7ee8b8a2498533ebf621f815c30da7ba4254"
   },
   {
+    "file": "evidence/package-build-results.json",
+    "bytes": 303,
+    "sha256": "62797330363b648102dc04bcd5c8f4c37b3b32c298a92d79be81aa6f3f17aa7a"
+  },
+  {
     "file": "evidence/reliability.png",
     "bytes": 111691,
     "sha256": "8ad659491008ec7df7d9719616ceedef67c0ed870feaecd63f74f3096dca1bb2"
@@ -143,6 +118,11 @@
     "file": "evidence/request-history.png",
     "bytes": 525407,
     "sha256": "46ea871896590d7432ba851584f8d0fed3caf382f71b20f681568c23bb807caa"
+  },
+  {
+    "file": "evidence/supabase-workflow-results.json",
+    "bytes": 443,
+    "sha256": "83ad296487a485cbf54734c7b49a05ce1f4e2e7448c441118c3afae9299f478e"
   },
   {
     "file": "evidence/traffic-lab.png",
@@ -185,6 +165,11 @@
     "sha256": "c12bb5c5589235e51db5271a2299f9d1c8f7d099fbc1b6d81930dace9fdc0705"
   },
   {
+    "file": "fusewall/migrations/postgres_001.sql",
+    "bytes": 3479,
+    "sha256": "03efa89b07a99ed80e0dd21ec533481436fa778de3270993209078cfde5ebd64"
+  },
+  {
     "file": "fusewall/models.py",
     "bytes": 2606,
     "sha256": "4cef56c5b59a1d1746a6daf642a6f3c357759fa06e64701c7c18b0271bd53c7f"
@@ -210,16 +195,6 @@
     "sha256": "0bec1f559b01a0ea406cc5d196bed6b5cacc22225c9b734b90725ab06d8eb02d"
   },
   {
-    "file": "fusewall/store.py",
-    "bytes": 25583,
-    "sha256": "4d3d4b23005622ccae0a421464cdc1c44c325556c31eeaa95252e656ef73282f"
-  },
-  {
-    "file": "fusewall/migrations/postgres_001.sql",
-    "bytes": 3479,
-    "sha256": "03efa89b07a99ed80e0dd21ec533481436fa778de3270993209078cfde5ebd64"
-  },
-  {
     "file": "fusewall/static/app.js",
     "bytes": 43823,
     "sha256": "01231fa6a50dfc7381e2cbbbcf13d167ea51f6501f1a263a02a7b5c2d914b9a1"
@@ -240,6 +215,26 @@
     "sha256": "15977423eccae0a2d0beaa14b0e6faa5d2942650da3ffdd16f1f6c0ec8db096b"
   },
   {
+    "file": "fusewall/store.py",
+    "bytes": 25583,
+    "sha256": "4d3d4b23005622ccae0a421464cdc1c44c325556c31eeaa95252e656ef73282f"
+  },
+  {
+    "file": "pyproject.toml",
+    "bytes": 546,
+    "sha256": "f12645efbae6754f2ff2eea7e0cb2293efaaa3c430a34003308c769d19f35c8d"
+  },
+  {
+    "file": "requirements-lock.txt",
+    "bytes": 424,
+    "sha256": "6e6de94c05860ecff21fd1c7461dba3ade165544a0c2ccae9a5ab313798635fe"
+  },
+  {
+    "file": "requirements.txt",
+    "bytes": 70,
+    "sha256": "cc8ea4dd6510293986e2ddc4815660d485a437f275d276e2c66b0831b8b0ccad"
+  },
+  {
     "file": "scripts/browser-check.cjs",
     "bytes": 8941,
     "sha256": "ea465e97c25105d84e37811969afbb845ebbb7d93b431c8d6753c7f4153d30a2"
@@ -253,6 +248,11 @@
     "file": "scripts/package.py",
     "bytes": 2399,
     "sha256": "509f6f7d8d1ace05d8a35d417dc682e04de854a929ac17654afae9473ec3968a"
+  },
+  {
+    "file": "start.ps1",
+    "bytes": 520,
+    "sha256": "e33ac0b42b653dd4c3f9c572f0569d4f5cfa45a1b05fbb58e014cc7121f11f82"
   },
   {
     "file": "tests/__init__.py",
@@ -288,5 +288,15 @@
     "file": "tests/test_review.py",
     "bytes": 11733,
     "sha256": "28e66a473b66c36df2cab3562dc5a0f65cf67493a5f129fcb89b6ef04408c2c3"
+  },
+  {
+    "file": "vercel.json",
+    "bytes": 170,
+    "sha256": "81ed046eaf1b21ee91396773131ec71765162ca55c214ce658e22eb5c3f49c6b"
+  },
+  {
+    "file": "verify.py",
+    "bytes": 1560,
+    "sha256": "99f351cdece1f30dd0bf2fc9fee5085e8507ae06d96980739dfa36b1693545b5"
   }
 ]

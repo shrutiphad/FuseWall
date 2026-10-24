@@ -1,0 +1,7 @@
+{
+  "wheel_build_passed": true,
+  "required_asset_hashes_match_source": true,
+  "unrelated_packages_excluded": true,
+  "wheel_sha256": "2e9ff8c6ae4c2d2e5fe18b1e7b1d2f84072c16d9282120f9edd03f56aa3953d0",
+  "scope": "Local Python wheel build and exact packaged asset verification; hosted build pending"
+}

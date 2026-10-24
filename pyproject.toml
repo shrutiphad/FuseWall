@@ -12,5 +12,9 @@ dependencies = ["fastapi==0.141.1", "uvicorn==0.52.4", "httpx==0.28.1", "psycopg
 [project.scripts]
 fusewall = "fusewall.__main__:main"
 
+[tool.setuptools]
+packages = ["fusewall"]
+include-package-data = false
+
 [tool.setuptools.package-data]
 fusewall = ["static/*", "migrations/*.sql"]
