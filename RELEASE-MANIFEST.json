@@ -31,13 +31,13 @@
   },
   {
     "file": "IMPLEMENTATION.md",
-    "bytes": 8300,
-    "sha256": "6ae123e8bf5bafa6215a1d252b8fd30dfc2e6cdd084e59274e7c8241df27b215"
+    "bytes": 8823,
+    "sha256": "6e78b17499392e5e80307b305994ef5992203a000b750f215e105745bf006cf9"
   },
   {
     "file": "README.md",
-    "bytes": 18417,
-    "sha256": "3797e76989f50c87c899d4ee4af35434f305564253b4aa73d6c8883e08d2632e"
+    "bytes": 18689,
+    "sha256": "e88385ec59164b18390e679ad3b7d466a5db3c84992726f61bb66f21028cbef9"
   },
   {
     "file": "app.py",
@@ -66,8 +66,8 @@
   },
   {
     "file": "docs/VERCEL-SUPABASE.md",
-    "bytes": 8029,
-    "sha256": "9194a5966c3684ea40af56514303fc4f44d40604aa4fcc44c6235ceab0f9535b"
+    "bytes": 12328,
+    "sha256": "a2b2c077117d045e8da09e3074885bc9a399394e073a463cde6b7c6a49aadb3d"
   },
   {
     "file": "evidence/automated-test-results.json",
@@ -118,6 +118,81 @@
     "file": "evidence/package-build-results.json",
     "bytes": 303,
     "sha256": "62797330363b648102dc04bcd5c8f4c37b3b32c298a92d79be81aa6f3f17aa7a"
+  },
+  {
+    "file": "evidence/production/browser-results.json",
+    "bytes": 629,
+    "sha256": "ed7fffdcdaf152c627f744bc608b873e726d4f3137053784f23116630078584e"
+  },
+  {
+    "file": "evidence/production/budget-preview.png",
+    "bytes": 95551,
+    "sha256": "0697375179c7a78395f91e08eb7917baf625148af2342a5c030e725f6be8c38e"
+  },
+  {
+    "file": "evidence/production/dashboard-desktop.png",
+    "bytes": 144968,
+    "sha256": "e795ac7faef1c35968493b496c553da426628d67677447624ca653b67464668f"
+  },
+  {
+    "file": "evidence/production/dashboard-mobile.png",
+    "bytes": 102562,
+    "sha256": "4c2a1901ccdccb3394785b6f545c2717a4adfe1e0e6e941bd2476ac48cf0404e"
+  },
+  {
+    "file": "evidence/production/decision-receipt.png",
+    "bytes": 482257,
+    "sha256": "7d5020da4bc11c665fb61a3d19f4fdd47f87f566897de2f1d53fe48bf38ae0b8"
+  },
+  {
+    "file": "evidence/production/deployment-results.json",
+    "bytes": 1262,
+    "sha256": "86f7b18e71a5add73790a5d29437c23719f53f1441fc1effd5f0020a3975a1ce"
+  },
+  {
+    "file": "evidence/production/final-verification.json",
+    "bytes": 619,
+    "sha256": "ed2236437076f9edca7c44775bc9a8526fab0b993aef96cb089958ef45c2356b"
+  },
+  {
+    "file": "evidence/production/live-http-results.json",
+    "bytes": 791,
+    "sha256": "6d1de73572e0aa19d88a547320b0dca1c88bc88c45673a1997130014d6ae0a7b"
+  },
+  {
+    "file": "evidence/production/preview-redeployment-results.json",
+    "bytes": 256,
+    "sha256": "c62aedd741867197c468cc08f7626d75441326980a8a549a556c67c7db1aee56"
+  },
+  {
+    "file": "evidence/production/public-access-results.json",
+    "bytes": 704,
+    "sha256": "ba76b21a250e598ee70e19cc8c2abda09c9356f840e4754a6529585da8c8fbcf"
+  },
+  {
+    "file": "evidence/production/reliability.png",
+    "bytes": 114041,
+    "sha256": "cefe6da00fb21c617a68f83533b45d7a00ade5ae0a1f47f0d27241cc0274cc9a"
+  },
+  {
+    "file": "evidence/production/request-history.png",
+    "bytes": 521211,
+    "sha256": "368628ebde5ad0f6f7f6b383219078858cef59d19835627d7be7ab072624e2d3"
+  },
+  {
+    "file": "evidence/production/runtime-privilege-results.json",
+    "bytes": 390,
+    "sha256": "a63580f7aebd0f973992241a01cf28208ee1d5c9dc98ddcf0b2f36de6db44c7f"
+  },
+  {
+    "file": "evidence/production/traffic-lab.png",
+    "bytes": 95973,
+    "sha256": "03704912075103c4454c40df04d211345e58acb29ed1eeab208d08441ed5e6f0"
+  },
+  {
+    "file": "evidence/production/usage-insights.png",
+    "bytes": 108770,
+    "sha256": "b3c011d450075fca589ddf1918995317ac0b9fcd19d1d2c69ce83d25f55cd93e"
   },
   {
     "file": "evidence/reliability.png",

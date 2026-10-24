@@ -1,3 +1,30 @@
+# Live deployment — 24 October 2026
+
+- Public application: https://fusewall.vercel.app
+- Repository: https://github.com/shrutiphad/FuseWall (main). PR #1 was merged by the fast-forward publication.
+- Deployed source: `52afe3d8d0fcdcc44bf04712b55736faea09be8e`; Vercel deployment `dpl_EGTp8SRrQ87P1c39ETAoQffrjNXY`, READY, production, Mumbai (`bom1`). Later documentation/evidence commits do not change this running application.
+- Supabase project `hfvgbffnhcohcbygmkpp`, Mumbai, organization Personal Projects on Free. Private `fusewall` and `fusewall_preview` schemas use separate restricted runtime roles, secrets, RLS and TLS transaction-pooler connections. No public/anonymous schema access; cross-schema runtime reads and ledger changes are rejected. Vercel team is Hobby; no trial or paid service was activated.
+- Public production HTTP and nine-route desktop/mobile browser checks passed. Tests cover owner unlock, keys, synthetic workloads, streaming, previews without traffic, request pagination/search, keyboard receipts, replay, insights, integrity, mobile navigation and startup latency. No browser console errors or horizontal page overflow. Initial session validation now completes before the token field is enabled, fixing a real startup race.
+- Preview sessions and records survived redeployment. Production retained 26 requests from before its final redeployment. Final accounting integrity agreed at 149200 micro-USD simulated cost with no scope/request mismatches. Disconnected hosted streams completed and settled; server cancellation is not claimed.
+- Queried available error logs for the final deployment using a 15-minute lookback; no error records returned. This is a release-time scan, not continuous monitoring. No external monitoring or uptime guarantee is claimed.
+- Temporary production test links were revoked or confirmed absent. Verification workload keys were revoked. Demo keys remain usable. Synthetic demonstration records are retained; no real provider was contacted.
+
+## Access and operations
+
+The owner token is private and is not included in Git, public evidence or release archives. The user receives a local owner-access file. Vercel uses the legacy Standard Protection scope: the current production URL is public, while previews and deployment URLs remain restricted. Dashboard/API authentication, HTTPS origin checks and the explicit host allowlist remain enforced.
+
+Automatic Git deployment remains disabled in vercel.json so code pushes do not bypass validation. To release: migrate/check only if required, build the exact Git commit, verify a protected preview, deploy production with production secrets, verify the actual production domain, then record the source SHA and evidence. Do not assume generated team aliases are public; query the project's configured domain. The actual domain is fusewall.vercel.app.
+
+A consistent production metadata backup was saved privately outside the repository. Preserve owner/fingerprint secrets separately. Restore requires an empty migrated private schema and accounting validation. The previous Vercel deployment `dpl_DHLDYS74pfbmvDJDmnhnPussZPzJ` is retained; it predates the startup race fix, so prefer redeploying the current verified commit for runtime recovery. Stop rollout on readiness failure, state loss, privilege failure or accounting mismatch; do not release uncertain holds to force success.
+
+Supabase performance advisors reported only informational items: the small rolling login-attempt table has no primary key and new request indexes had not yet been used. Their [primary-key guidance](https://supabase.com/docs/guides/database/database-linter?lint=0004_no_primary_key) and [unused-index guidance](https://supabase.com/docs/guides/database/database-linter?lint=0005_unused_index) are references for future measured tuning. Security advisors returned no findings at setup; this is not a certification or penetration test.
+
+Single-owner simulation only. Real LLM adapters, company multi-user access, live billing protection, load testing, high availability and customer validation remain incomplete. Vercel Hobby personal/noncommercial restrictions apply. No additional spending was authorized or activated.
+
+The earlier preparation records below are historical; current status is above.
+
+---
+
 # Hosted preview verified — 24 October 2026
 
 Git commit 685dc5a14b3fbcc71edde0ebda485ea84b16ba59 built successfully on Vercel at the target recorded in evidence/hosted-preview/. Hosted HTTP checks passed login, bounded synthetic workloads, SSE, conservative disconnect accounting, replay, revocation and accounting integrity. The proxy completed the disconnected stream and the full simulated cost settled; cancellation is not claimed. Nine-route desktop/mobile browser checks passed without console errors or page overflow.

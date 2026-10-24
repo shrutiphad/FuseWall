@@ -1,0 +1,22 @@
+[
+  {
+    "schema": "fusewall",
+    "operation": "cross_schema_read",
+    "rejected": true
+  },
+  {
+    "schema": "fusewall",
+    "operation": "ledger_mutation",
+    "rejected": true
+  },
+  {
+    "schema": "fusewall_preview",
+    "operation": "cross_schema_read",
+    "rejected": true
+  },
+  {
+    "schema": "fusewall_preview",
+    "operation": "ledger_mutation",
+    "rejected": true
+  }
+]

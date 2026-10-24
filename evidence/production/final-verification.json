@@ -1,0 +1,23 @@
+{
+  "verification_keys_inactive": true,
+  "temporary_test_links": {
+    "old_link": "already absent",
+    "final_link": "revoked"
+  },
+  "production_integrity": {
+    "ok": true,
+    "ledger_micro": 149200,
+    "request_micro": 149200,
+    "inconsistent_scopes": [],
+    "inconsistent_requests": []
+  },
+  "records_from_before_final_redeployment": 26,
+  "current_production_sha": "52afe3d8d0fcdcc44bf04712b55736faea09be8e",
+  "runtime_error_scan": {
+    "deployment": "dpl_EGTp8SRrQ87P1c39ETAoQffrjNXY",
+    "lookback": "15m",
+    "error_records_returned": 0,
+    "command_completed": true
+  },
+  "mode": "simulation"
+}

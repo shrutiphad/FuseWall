@@ -1,0 +1,38 @@
+{
+  "version": "0.3.0",
+  "date": "2026-10-24",
+  "public_url": "https://fusewall.vercel.app",
+  "github_repository": "https://github.com/shrutiphad/FuseWall",
+  "deployed_source_commit": "52afe3d8d0fcdcc44bf04712b55736faea09be8e",
+  "deployment_id": "dpl_EGTp8SRrQ87P1c39ETAoQffrjNXY",
+  "deployment_state": "READY",
+  "environment": "production",
+  "region": "bom1",
+  "storage": "Supabase PostgreSQL",
+  "supabase_project": "hfvgbffnhcohcbygmkpp",
+  "plans": {
+    "vercel": "hobby",
+    "supabase_organization": "free",
+    "paid_trial_activated": false
+  },
+  "verification": {
+    "production_http": true,
+    "production_desktop_mobile_browser": true,
+    "routes": 9,
+    "delayed_login_regression": true,
+    "public_root_200": true,
+    "anonymous_owner_api_401": true,
+    "postgres_accounting_integrity": true,
+    "preview_session_and_data_survive_redeployment": true,
+    "production_older_records_survive_redeployment": 26,
+    "production_runtime_error_scan_count": 0
+  },
+  "limits": [
+    "Single owner",
+    "Synthetic inference only",
+    "No live provider or real billing protection",
+    "Company load and multi-user access not validated"
+  ],
+  "continuous_git_deployment": false,
+  "verified_at_utc": "2026-10-24T16:49:53.030317+00:00"
+}

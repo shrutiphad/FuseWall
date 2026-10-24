@@ -1,3 +1,9 @@
+# Deployment verified — 24 October 2026
+
+The single-owner simulation is live at https://fusewall.vercel.app with persistent Supabase PostgreSQL. Actual public HTTP, desktop/mobile browser, accounting, privileges and redeployment persistence checks passed. Deployed source: 52afe3d8d0fcdcc44bf04712b55736faea09be8e. See docs/VERCEL-SUPABASE.md and evidence/production/ for scope and evidence. No real LLM provider or company production-readiness claim is included. Earlier implementation notes below are historical.
+
+---
+
 # 0.3.0 shared-storage preparation
 
 22 October 2026. Supabase was selected by the user. The PostgreSQL adapter, private-schema migration, durable owner sessions/rate counters, cross-instance lab lease, expiry-gated recovery, explicit HTTPS cloud entrypoint and metadata export/empty-schema restore are implemented. Native SQLite stays supported. Vercel refuses SQLite fallback.

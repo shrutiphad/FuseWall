@@ -1,16 +1,18 @@
-# Fusewall Local
+# Fusewall
 
 A working local AI budget gateway, dashboard, and deterministic failure laboratory. No cloud account, model download, frontend build, or paid API is needed to use this version.
 
 **Version 0.3.0 · single-owner prototype · simulated upstream only.** Costs are synthetic USD reference amounts, not real charges or verified savings. This version does not hold prepaid money or call a real LLM. Hosted availability is recorded in docs/VERCEL-SUPABASE.md.
 
-## PostgreSQL / Vercel preparation in 0.3
+## Hosted version 0.3.0
 
-Shared PostgreSQL storage, durable owner sessions/login counters, cross-worker lab coordination, expired-lease recovery, metadata export/restore, a FastAPI cloud entrypoint and deployment exclusions are implemented. They were tested on isolated local PostgreSQL. **The actual Supabase connection and Vercel preview passed hosted HTTP and desktop/mobile browser checks.** Production publication remains pending in this commit. See evidence/hosted-preview/ for the tested preview target.
+**Live: https://fusewall.vercel.app**. The application runs on Vercel with persistent Supabase PostgreSQL in Mumbai. Owner login, API keys, streaming synthetic workloads, previews, history, replay, export and accounting checks passed on the public production address. Nine screens passed desktop/mobile browser checks, including delayed initial session validation. Anonymous visitors can load the lock screen; owner APIs require the private owner token.
 
-See [Vercel/Supabase setup and rollout gates](docs/VERCEL-SUPABASE.md). The deployment requires a real persistent database, stable encrypted secrets and explicit hosts. Automatic Git deployments are disabled until a verified preview exists. The native SQLite mode remains runnable as before.
+The deployed source commit is `52afe3d8d0fcdcc44bf04712b55736faea09be8e`. Evidence and screenshots are in `evidence/production/`. Native SQLite remains supported. This remains a single-owner simulator with no real LLM provider, paid inference, prepaid funds or verified customer savings.
 
-The expanded suite has 103 cases when `FUSEWALL_PG_TEST_URL` points to an isolated loopback PostgreSQL server. Without it, PostgreSQL-specific tests are explicitly skipped; do not describe that run as full cloud verification. Never point disposable schema tests at customer/Supabase databases.
+See [Vercel/Supabase deployment record and runbook](docs/VERCEL-SUPABASE.md). Stable secrets and dedicated preview/production database roles are configured outside Git. Automatic Git deployment is disabled; releases are deployed explicitly after validation.
+
+The expanded local suite passed all 103 cases with PostgreSQL on 22 October. The 24 October rerun passed 63 cases and explicitly skipped 40 PostgreSQL cases because the loopback test server could not bind. Actual Supabase privilege/API checks and hosted HTTP/browser verification passed separately. Never point disposable schema tests at Supabase/customer databases.
 
 ## New in 0.2
 

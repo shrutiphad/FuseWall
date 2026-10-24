@@ -1,0 +1,8 @@
+{
+  "preview_deployment_id": "dpl_D3aYpsZR9MXeYqPmZeR7syA7Zg5H",
+  "commit": "0ee222e96868ab29fcf5d2f6f9993787eafb7e63",
+  "owner_session_survives_redeployment": true,
+  "data_survives_redeployment": true,
+  "requests": 86,
+  "final_cloud_ui_asset": true
+}

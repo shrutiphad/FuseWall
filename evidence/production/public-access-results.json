@@ -1,0 +1,36 @@
+{
+  "url": "https://fusewall.vercel.app",
+  "checks": {
+    "/": {
+      "status": 200,
+      "json": null
+    },
+    "/health/live": {
+      "status": 200,
+      "json": {
+        "status": "alive",
+        "version": "0.3.0",
+        "mode": "simulation",
+        "storage": "postgres"
+      }
+    },
+    "/health/ready": {
+      "status": 200,
+      "json": {
+        "status": "ready",
+        "mode": "simulation"
+      }
+    },
+    "/api/state": {
+      "status": 401,
+      "json": {
+        "error": {
+          "code": "owner_required",
+          "message": "Unlock this installation with its owner token.",
+          "details": {}
+        }
+      }
+    }
+  },
+  "final_login_fix_served": true
+}
