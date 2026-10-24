@@ -20,8 +20,8 @@
       <div class="mode-note"><span class="live-dot"></span> Offline simulation · No paid API calls</div>
       <form id="unlock-form">
         <label for="owner-token">Owner token</label>
-        <input id="owner-token" type="password" autocomplete="off" placeholder="fw_owner_…" required minlength="16">
-        <button class="button primary full" type="submit">Unlock workspace <span aria-hidden="true">→</span></button>
+        <input id="owner-token" type="password" autocomplete="off" placeholder="fw_owner_…" required minlength="16" disabled>
+        <button class="button primary full" type="submit" disabled>Checking connection…</button>
       </form>
       <p id="login-error" role="alert" class="error"></p>
       <div class="unlock-help"><strong>First time here?</strong><p>From the project folder, run <code>python -m fusewall token</code> and paste the local token above. It stays on this computer.</p></div>

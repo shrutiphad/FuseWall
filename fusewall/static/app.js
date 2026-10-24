@@ -69,7 +69,7 @@ function requestsTable(rows, compact = false) {
 }
 function chart() {
   const rows = [...state.requests].reverse().slice(-16), w = innerWidth < 600 ? Math.max(280, innerWidth - 70) : 540, h = 170, left = 60, right = 16, top = 16, bottom = 32;
-  if (!rows.length) return empty('Your usage curve starts here', 'Each completed synthetic request adds a accounting record.');
+  if (!rows.length) return empty('Your usage curve starts here', 'Each completed synthetic request adds an accounting record.');
   const max = Math.max(...rows.map(r => r.actual), 1000);
   const points = rows.map((r,i) => [left + i * (w-left-right) / Math.max(1, rows.length-1), top + (1-r.actual/max)*(h-top-bottom)]);
   const path = points.map((p,i) => `${i?'L':'M'}${p[0]},${p[1]}`).join(' ');
@@ -217,4 +217,10 @@ async function bootstrap() {
   }
   await refresh();
 }
-bootstrap().catch(err=>{locked(); if(err.status!==401) $('#login-error').textContent=err.message;});
+bootstrap().catch(err=>{locked(); if(err.status!==401) $('#login-error').textContent=err.message;}).finally(()=>{
+  // Initial session validation must finish before accepting an owner credential.
+  $('#owner-token').disabled=false;
+  const submit=$('#unlock-form button[type="submit"]');
+  submit.disabled=false;
+  submit.innerHTML='Unlock workspace <span aria-hidden="true">→</span>';
+});

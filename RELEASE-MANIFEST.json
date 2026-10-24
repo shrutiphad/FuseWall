@@ -211,8 +211,8 @@
   },
   {
     "file": "fusewall/static/app.js",
-    "bytes": 43819,
-    "sha256": "565a155a6d105a33c852dbafa86e4ba5e9acf9f973a0402fd308964fe07c9e9d"
+    "bytes": 44111,
+    "sha256": "b8dc6f690ac25e73ebe47b837efd9bde0acf0d9c8cb7d3bba000c80c5a9f8e8d"
   },
   {
     "file": "fusewall/static/favicon.svg",
@@ -221,8 +221,8 @@
   },
   {
     "file": "fusewall/static/index.html",
-    "bytes": 3826,
-    "sha256": "27dcc2427ef531b2582947838801ad034c3d2834438ca732d86fed7f3e52386c"
+    "bytes": 3814,
+    "sha256": "cec07c46925a8db5af2dcd8d5678a37f91aec27ec4e6cfbeb7b90bce699777c2"
   },
   {
     "file": "fusewall/static/styles.css",
@@ -251,8 +251,8 @@
   },
   {
     "file": "scripts/browser-check.cjs",
-    "bytes": 9343,
-    "sha256": "0d16fca1ad74ace662c00811e150a9bd4941aa7ece0b4e16561e0e3ab6e45c2c"
+    "bytes": 9664,
+    "sha256": "40ce26d3b0bf109a9daf0ba83b8b99e07833e5aec32084764eed68f98b30acc9"
   },
   {
     "file": "scripts/cloud-admin.py",

@@ -21,6 +21,14 @@ async function main() {
       headers: {...route.request().headers(), 'x-vercel-trusted-oidc-idp-token': process.env.FUSEWALL_VERCEL_OIDC_TOKEN}
     } : {}));
   }
+  let initialSessionCheck = true;
+  await page.route('**/api/state', async route => {
+    if (initialSessionCheck && route.request().method() === 'GET') {
+      initialSessionCheck = false;
+      await new Promise(resolve => setTimeout(resolve, 800));
+    }
+    await route.fallback();
+  });
   const keyName = 'Browser verified key '+Date.now();
   const errors=[];
   page.on('pageerror', e=>errors.push(e.message));
@@ -128,7 +136,7 @@ async function main() {
   await page.evaluate(()=>window.scrollTo(0,0));
   await page.screenshot({path:path.join(out,'dashboard-mobile.png'),fullPage:true});
   assert.deepEqual(errors,[],'Browser console/runtime errors');
-  const results={version:'0.3.0',target:base,scope:'Authorized synthetic demonstration traffic; no live provider',desktop:'1440×1000',mobile:'390×844',routesChecked:9,ownerLogin:true,keyCreation:true,lab:true,previewWithoutTraffic:true,blockedPreview:true,pagination:true,keyboardReceipt:true,search:true,preservesFocusedDraft:true,mobileMenuEscape:true,receipt:true,replay:true,insights:true,integrity:true,horizontalOverflow:false,consoleErrors:errors};
+  const results={version:'0.3.0',target:base,scope:'Authorized synthetic demonstration traffic; no live provider',desktop:'1440×1000',mobile:'390×844',routesChecked:9,ownerLogin:true,delayedSessionBootstrap:true,keyCreation:true,lab:true,previewWithoutTraffic:true,blockedPreview:true,pagination:true,keyboardReceipt:true,search:true,preservesFocusedDraft:true,mobileMenuEscape:true,receipt:true,replay:true,insights:true,integrity:true,horizontalOverflow:false,consoleErrors:errors};
   fs.writeFileSync(path.join(out,'browser-results.json'),JSON.stringify(results,null,2));
   console.log(JSON.stringify(results));
   await browser.close();
